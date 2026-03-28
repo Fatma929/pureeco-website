@@ -10,7 +10,7 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ]
 
-export function Navigation(): JSX.Element {
+export function Navigation() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
 
