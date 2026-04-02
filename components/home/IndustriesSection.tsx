@@ -1,4 +1,7 @@
+'use client'
+
 import { FlaskConical, Building2, Flame, Layers, Factory, Zap, Wheat, Truck } from 'lucide-react'
+import { useReveal } from '@/hooks/useReveal'
 
 const prioritySectors = [
   {
@@ -22,55 +25,88 @@ const prioritySectors = [
 ]
 
 const additionalSectors = [
-  { label: 'Steel & Iron', icon: Layers },
-  { label: 'Aluminum Smelting', icon: Zap },
+  { label: 'Steel & Iron',             icon: Layers  },
+  { label: 'Aluminum Smelting',        icon: Zap     },
   { label: 'Industrial Manufacturing', icon: Factory },
-  { label: 'Agricultural Processing', icon: Wheat },
-  { label: 'Logistics & Freight', icon: Truck },
+  { label: 'Agricultural Processing',  icon: Wheat   },
+  { label: 'Logistics & Freight',      icon: Truck   },
 ]
 
 export function IndustriesSection() {
+  const headerRef  = useReveal('[data-reveal]', 0.2)
+  const cardsRef   = useReveal('[data-reveal]', 0.1)
+
   return (
     <section className="py-20 px-6 md:px-12" style={{ background: '#0A0A0A' }}>
       <div className="max-w-5xl mx-auto">
-        <span className="font-mono-label block text-center mb-3" style={{ color: '#00D4FF' }}>
-          Sector Coverage
-        </span>
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4" style={{ color: '#FFFFFF' }}>
-          High-Precision Tracking by Sector.
-        </h2>
-        <p className="text-center mb-12 max-w-xl mx-auto" style={{ color: '#8B9AB0' }}>
-          Emission factors, process parameters, and regulatory mappings are pre-configured
-          per industry — not generic templates.
-        </p>
 
-        {/* Priority sectors with detail */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-          {prioritySectors.map(({ icon: Icon, label, tag, detail }) => (
+        {/* Header — blur-to-clear */}
+        <div ref={headerRef as React.RefObject<HTMLDivElement>}>
+          <span
+            data-reveal
+            className="font-mono-label block text-center mb-3 reveal-blur"
+            style={{ color: '#00D4FF' }}
+          >
+            Sector Coverage
+          </span>
+          <h2
+            data-reveal data-reveal-delay="100"
+            className="text-3xl md:text-4xl font-extrabold text-center mb-4 reveal-blur"
+            style={{ color: '#FFFFFF' }}
+          >
+            High-Precision Tracking by Sector.
+          </h2>
+          <p
+            data-reveal data-reveal-delay="200"
+            className="text-center mb-12 max-w-xl mx-auto reveal-blur"
+            style={{ color: '#8B9AB0' }}
+          >
+            Emission factors, process parameters, and regulatory mappings are pre-configured
+            per industry — not generic templates.
+          </p>
+        </div>
+
+        {/* Priority cards — horizontal slide with stagger */}
+        <div
+          ref={cardsRef as React.RefObject<HTMLDivElement>}
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8"
+        >
+          {prioritySectors.map(({ icon: Icon, label, tag, detail }, i) => (
             <div
               key={label}
-              className="p-6 rounded-xl transition-all duration-200"
+              data-reveal
+              data-reveal-delay={String(i * 130)}
+              className="p-6 rounded-xl transition-all duration-200 slide-in-left"
               style={{
                 background: 'rgba(17,24,39,0.9)',
                 border: '1px solid rgba(0,255,135,0.2)',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.boxShadow = '0 0 24px rgba(0,255,135,0.08)'
+                (e.currentTarget as HTMLDivElement).style.boxShadow = '0 0 24px rgba(0,255,135,0.1)'
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
               }}
             >
               <div className="flex items-center justify-between mb-4">
+                {/* Glow pulse on icon */}
                 <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center"
-                  style={{ background: 'rgba(0,255,135,0.08)', border: '1px solid rgba(0,255,135,0.2)' }}
+                  className="w-10 h-10 rounded-lg flex items-center justify-center glow-pulse"
+                  style={{
+                    background: 'rgba(0,255,135,0.08)',
+                    border: '1px solid rgba(0,255,135,0.2)',
+                  }}
                 >
                   <Icon className="w-5 h-5" style={{ color: '#00FF87' }} aria-hidden="true" />
                 </div>
                 <span
                   className="font-mono-label px-2 py-0.5 rounded"
-                  style={{ color: '#00FF87', background: 'rgba(0,255,135,0.08)', border: '1px solid rgba(0,255,135,0.2)', fontSize: '0.6rem' }}
+                  style={{
+                    color: '#00FF87',
+                    background: 'rgba(0,255,135,0.08)',
+                    border: '1px solid rgba(0,255,135,0.2)',
+                    fontSize: '0.6rem',
+                  }}
                 >
                   {tag}
                 </span>
@@ -101,7 +137,9 @@ export function IndustriesSection() {
               }}
             >
               <Icon className="w-5 h-5" style={{ color: '#8B9AB0' }} aria-hidden="true" />
-              <span className="font-mono-label text-center" style={{ color: '#8B9AB0', fontSize: '0.65rem' }}>{label}</span>
+              <span className="font-mono-label text-center" style={{ color: '#8B9AB0', fontSize: '0.65rem' }}>
+                {label}
+              </span>
             </div>
           ))}
         </div>
