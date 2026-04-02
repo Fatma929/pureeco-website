@@ -9,10 +9,11 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          green: '#166534',
-          slate: '#1E293B',
-          'green-light': '#22C55E',
-          'slate-muted': '#475569',
+          charcoal: '#24292E',
+          emerald:  '#003D33',
+          lime:     '#4ADE80',
+          surface:  '#2E3439',
+          muted:    'rgba(255,255,255,0.5)',
         },
       },
       fontFamily: {

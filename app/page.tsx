@@ -1,9 +1,10 @@
 import { HeroSection } from '@/components/home/HeroSection'
-import { ProblemSolutionSection } from '@/components/home/ProblemSolutionSection'
 import { ServicesSection } from '@/components/home/ServicesSection'
+import { ROISection } from '@/components/home/ROISection'
+import { IndustriesSection } from '@/components/home/IndustriesSection'
 import { IntegrationsSection } from '@/components/home/IntegrationsSection'
 import { HowItWorksSection } from '@/components/home/HowItWorksSection'
-import { IndustriesSection } from '@/components/home/IndustriesSection'
+import { ComplianceStatusBar } from '@/components/home/ComplianceStatusBar'
 import { ReportsPreviewSection } from '@/components/home/ReportsPreviewSection'
 import { BottomCTASection } from '@/components/home/BottomCTASection'
 
@@ -13,11 +14,12 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <ProblemSolutionSection />
       <ServicesSection />
+      <ROISection />
+      <IndustriesSection />
       <IntegrationsSection />
       <HowItWorksSection />
-      <IndustriesSection />
+      <ComplianceStatusBar />
       <ReportsPreviewSection />
       <BottomCTASection />
     </>

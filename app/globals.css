@@ -1,49 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0A0A0A;
-  --foreground: #E2E8F0;
+  --background: #0C2E19;
+  --foreground: #FFFFFF;
+
+  --clr-bg:        #0C2E19;
+  --clr-surface:   #0f3820;
+  --clr-emerald:   #0C2E19;
+  --clr-green:     #4ADE80;
 }
 
 @theme {
-  /* Neon-Industrial brand tokens */
-  --color-brand-green: #00FF87;
-  --color-brand-slate: #0D1117;
-  --color-brand-green-light: #00FF87;
-  --color-brand-slate-muted: #8B9AB0;
-  --color-brand-teal: #00D4FF;
-  --color-brand-surface: #111827;
-  --color-brand-border: #1E2D3D;
+  --color-brand-bg:        #0C2E19;
+  --color-brand-surface:   #0f3820;
+  --color-brand-emerald:   #0C2E19;
+  --color-brand-lime:      #4ADE80;
+  --color-brand-border:    rgba(255,255,255,0.2);
+  --color-brand-muted:     rgba(255,255,255,0.5);
 
-  /* Typography */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'Geist Mono', 'Courier New', monospace;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--clr-bg);
+  color: #FFFFFF;
   font-family: var(--font-sans);
 }
 
-/* ── Grain texture overlay ── */
+/* ── Subtle grain overlay ── */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.035;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 128px 128px;
 }
 
-/* ── Scanline filter for hero ── */
+/* ── Scanlines ── */
 .scanlines::after {
   content: '';
   position: absolute;
@@ -53,33 +53,209 @@ body::before {
     to bottom,
     transparent 0px,
     transparent 3px,
-    rgba(0, 0, 0, 0.18) 3px,
-    rgba(0, 0, 0, 0.18) 4px
+    rgba(0,0,0,0.08) 3px,
+    rgba(0,0,0,0.08) 4px
   );
   z-index: 3;
 }
 
-/* ── Blueprint grid ── */
+/* ── Blueprint grid — very subtle ── */
 .blueprint-grid {
   background-image:
-    linear-gradient(rgba(0, 212, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* ── Request Demo button glow + lift ── */
+/* ── Green pill button (primary CTA) ── */
+.btn-lime {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  background: #4ADE80;
+  color: #1A1A1A;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  border: none;
+}
+.btn-lime:hover {
+  transform: translateY(-2px);
+  background: #22c55e;
+  box-shadow: 0 6px 24px rgba(74,222,128,0.35);
+}
+
+/* ── Outline pill button (secondary) ── */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  background: transparent;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255,255,255,0.35);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.btn-outline:hover {
+  border-color: #4ADE80;
+  background: rgba(74,222,128,0.06);
+}
+
+/* ── Legacy btn-demo / btn-magnetic aliases ── */
 .btn-demo {
-  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .btn-demo:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 24px rgba(0, 255, 135, 0.5), 0 6px 20px rgba(0, 255, 135, 0.25);
+  box-shadow: 0 6px 24px rgba(74,222,128,0.3);
+}
+.btn-magnetic {
+  position: relative;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn-magnetic:hover {
+  box-shadow: 0 0 0 3px rgba(74,222,128,0.2), 0 0 24px rgba(74,222,128,0.3);
 }
 
-/* ── Technical label font ── */
+/* ── Section label ── */
+.section-label {
+  display: inline-block;
+  padding: 0.25rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.75);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Technical mono label ── */
 .font-mono-label {
   font-family: var(--font-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 0.7rem;
 }
+
+/* ── Circular mask (overlapping image reveal) ── */
+.circle-mask {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* ── Fade-in-Up ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up           { animation: fadeInUp 1.2s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-in-up-delay-1   { animation-delay: 0.15s; }
+.animate-fade-in-up-delay-2   { animation-delay: 0.35s; }
+.animate-fade-in-up-delay-3   { animation-delay: 0.55s; }
+.animate-fade-in-up-delay-4   { animation-delay: 0.75s; }
+
+/* ── Scroll reveal ── */
+.reveal-blur {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+              filter  0.7s cubic-bezier(0.22,1,0.36,1),
+              transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-blur.is-visible { opacity: 1; filter: blur(0); transform: translateY(0); }
+
+/* ── Slide in left ── */
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+              transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.slide-in-left.is-visible { opacity: 1; transform: translateX(0); }
+
+/* ── Glow pulse ── */
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 6px  rgba(74,222,128,0.2); }
+  50%     { box-shadow: 0 0 18px rgba(74,222,128,0.5), 0 0 32px rgba(74,222,128,0.15); }
+}
+.glow-pulse { animation: glowPulse 2.4s ease-in-out infinite; }
+
+/* ── SVG data-flow ── */
+.data-flow-line {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.22,1,0.36,1);
+}
+.data-flow-line.is-visible { stroke-dashoffset: 0; }
+
+/* ── Compliance bar fill ── */
+@keyframes fillBar {
+  from { width: 0%; }
+  to   { width: var(--bar-target, 78%); }
+}
+.compliance-bar-fill {
+  animation: fillBar 1.8s cubic-bezier(0.22,1,0.36,1) forwards;
+  animation-delay: 0.4s;
+  width: 0%;
+}
+
+/* ── ERP marquee ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 22s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── Loader ── */
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+@keyframes progressLoad {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+.loader-cursor { animation: blink 0.9s step-end infinite; }
+.loader-bar    { animation: progressLoad 2.2s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #0C2E19; }
+::-webkit-scrollbar-thumb { background: rgba(74,222,128,0.35); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(74,222,128,0.65); }
+* { scrollbar-width: thin; scrollbar-color: rgba(74,222,128,0.35) #0C2E19; }
+
+/* ── Glass card ── */
+.glass-card {
+  background: rgba(46,52,57,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+}
+
+/* ── IDE surface ── */
+.ide-surface {
+  background: #0f3820;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+.ide-line-num { color: rgba(255,255,255,0.25); user-select: none; min-width: 2.5rem; text-align: right; padding-right: 1rem; }
+.ide-keyword  { color: #4ADE80; }
+.ide-string   { color: rgba(255,255,255,0.85); }
+.ide-comment  { color: rgba(255,255,255,0.35); font-style: italic; }
+.ide-number   { color: #4ADE80; }
+.ide-operator { color: rgba(255,255,255,0.6); }

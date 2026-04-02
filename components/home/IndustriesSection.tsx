@@ -7,20 +7,20 @@ const prioritySectors = [
   {
     icon: FlaskConical,
     label: 'Fertilizer & Agrochemicals',
-    tag: 'HIGH-PRECISION',
-    detail: 'N₂O emission-factor mapping · Nitric acid process tracking · CBAM Chapter 31 compliance',
+    tag: 'CBAM Exposed',
+    detail: 'N₂O emissions · Nitric acid processes · Chapter 31 CBAM compliance',
   },
   {
     icon: Building2,
     label: 'Cement & Clinker',
-    tag: 'HIGH-PRECISION',
-    detail: 'Calcination CO₂ quantification · Kiln fuel-mix ledger · EU ETS allocation reconciliation',
+    tag: 'CBAM Exposed',
+    detail: 'Calcination CO₂ · Kiln fuel tracking · EU ETS reconciliation',
   },
   {
     icon: Flame,
     label: 'Petrochemicals & Refining',
-    tag: 'HIGH-PRECISION',
-    detail: 'Flaring & fugitive emission capture · Scope 1 stack monitoring · CBAM Chapter 27/29',
+    tag: 'CBAM Exposed',
+    detail: 'Flaring & fugitive emissions · Scope 1 monitoring · CBAM Chapter 27/29',
   },
 ]
 
@@ -33,113 +33,91 @@ const additionalSectors = [
 ]
 
 export function IndustriesSection() {
-  const headerRef  = useReveal('[data-reveal]', 0.2)
-  const cardsRef   = useReveal('[data-reveal]', 0.1)
+  const headerRef = useReveal('[data-reveal]', 0.2)
+  const cardsRef  = useReveal('[data-reveal]', 0.1)
 
   return (
-    <section className="py-20 px-6 md:px-12" style={{ background: '#0A0A0A' }}>
+    <section className="py-24 px-6 md:px-12" style={{ background: '#0C2E19' }}>
       <div className="max-w-5xl mx-auto">
-
-        {/* Header — blur-to-clear */}
         <div ref={headerRef as React.RefObject<HTMLDivElement>}>
-          <span
-            data-reveal
-            className="font-mono-label block text-center mb-3 reveal-blur"
-            style={{ color: '#00D4FF' }}
-          >
-            Sector Coverage
-          </span>
+          <span data-reveal className="section-label mb-3 inline-block reveal-blur" style={{ color: '#F5F0E8', borderColor: 'rgba(245,240,232,0.3)' }}>Built for Heavy Industry</span>
           <h2
             data-reveal data-reveal-delay="100"
-            className="text-3xl md:text-4xl font-extrabold text-center mb-4 reveal-blur"
-            style={{ color: '#FFFFFF' }}
+            className="text-3xl md:text-4xl mt-3 mb-3 reveal-blur"
+            style={{ color: '#F5F0E8', fontWeight: 500 }}
           >
-            High-Precision Tracking by Sector.
+            Cement. Fertilizers. Petrochemicals.
           </h2>
           <p
             data-reveal data-reveal-delay="200"
-            className="text-center mb-12 max-w-xl mx-auto reveal-blur"
-            style={{ color: '#8B9AB0' }}
+            className="mb-12 max-w-xl reveal-blur"
+            style={{ color: 'rgba(245,240,232,0.7)' }}
           >
-            Emission factors, process parameters, and regulatory mappings are pre-configured
-            per industry — not generic templates.
+            Pre-configured for the sectors most exposed to CBAM and EU ETS.
+            Industry-specific compliance from day one.
           </p>
         </div>
 
-        {/* Priority cards — horizontal slide with stagger */}
-        <div
-          ref={cardsRef as React.RefObject<HTMLDivElement>}
-          className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8"
-        >
+        <div ref={cardsRef as React.RefObject<HTMLDivElement>} className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           {prioritySectors.map(({ icon: Icon, label, tag, detail }, i) => (
             <div
               key={label}
               data-reveal
               data-reveal-delay={String(i * 130)}
               className="p-6 rounded-xl transition-all duration-200 slide-in-left"
-              style={{
-                background: 'rgba(17,24,39,0.9)',
-                border: '1px solid rgba(0,255,135,0.2)',
-              }}
+              style={{ background: '#F5F0E8', border: '1px solid rgba(12,46,25,0.15)' }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.boxShadow = '0 0 24px rgba(0,255,135,0.1)'
+                const el = e.currentTarget as HTMLDivElement
+                el.style.border = '1px solid rgba(12,46,25,0.4)'
+                el.style.background = '#edeae2'
+                el.style.transform = 'translateY(-2px)'
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
+                const el = e.currentTarget as HTMLDivElement
+                el.style.border = '1px solid rgba(12,46,25,0.15)'
+                el.style.background = '#F5F0E8'
+                el.style.transform = 'translateY(0)'
               }}
             >
               <div className="flex items-center justify-between mb-4">
-                {/* Glow pulse on icon */}
                 <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center glow-pulse"
-                  style={{
-                    background: 'rgba(0,255,135,0.08)',
-                    border: '1px solid rgba(0,255,135,0.2)',
-                  }}
+                  className="w-10 h-10 rounded-lg flex items-center justify-center"
+                  style={{ background: 'rgba(12,46,25,0.08)', border: '1px solid rgba(12,46,25,0.2)' }}
                 >
-                  <Icon className="w-5 h-5" style={{ color: '#00FF87' }} aria-hidden="true" />
+                  <Icon className="w-5 h-5" style={{ color: '#0C2E19' }} aria-hidden="true" />
                 </div>
                 <span
                   className="font-mono-label px-2 py-0.5 rounded"
-                  style={{
-                    color: '#00FF87',
-                    background: 'rgba(0,255,135,0.08)',
-                    border: '1px solid rgba(0,255,135,0.2)',
-                    fontSize: '0.6rem',
-                  }}
+                  style={{ color: '#0C2E19', background: 'rgba(12,46,25,0.08)', border: '1px solid rgba(12,46,25,0.2)', fontSize: '0.6rem' }}
                 >
                   {tag}
                 </span>
               </div>
-              <h3 className="text-base font-bold mb-3" style={{ color: '#E2E8F0' }}>{label}</h3>
-              <p className="font-mono-label leading-relaxed" style={{ color: '#8B9AB0', fontSize: '0.65rem' }}>
-                {detail}
-              </p>
+              <h3 className="text-base mb-2" style={{ color: '#0C2E19', fontWeight: 600 }}>{label}</h3>
+              <p className="text-xs leading-relaxed" style={{ color: 'rgba(12,46,25,0.6)' }}>{detail}</p>
             </div>
           ))}
         </div>
 
-        {/* Additional sectors */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
           {additionalSectors.map(({ label, icon: Icon }) => (
             <div
               key={label}
               className="flex flex-col items-center gap-2 p-4 rounded-xl transition-all duration-200"
-              style={{
-                background: 'rgba(17,24,39,0.5)',
-                border: '1px solid rgba(0,212,255,0.08)',
-              }}
+              style={{ background: '#F5F0E8', border: '1px solid rgba(12,46,25,0.12)' }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.border = '1px solid rgba(0,212,255,0.3)'
+                const el = e.currentTarget as HTMLDivElement
+                el.style.border = '1px solid rgba(12,46,25,0.35)'
+                el.style.background = '#edeae2'
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.border = '1px solid rgba(0,212,255,0.08)'
+                const el = e.currentTarget as HTMLDivElement
+                el.style.border = '1px solid rgba(12,46,25,0.12)'
+                el.style.background = '#F5F0E8'
               }}
             >
-              <Icon className="w-5 h-5" style={{ color: '#8B9AB0' }} aria-hidden="true" />
-              <span className="font-mono-label text-center" style={{ color: '#8B9AB0', fontSize: '0.65rem' }}>
-                {label}
-              </span>
+              <Icon className="w-5 h-5" style={{ color: '#0C2E19' }} aria-hidden="true" />
+              <span className="font-mono-label text-center" style={{ color: 'rgba(12,46,25,0.7)', fontSize: '0.65rem' }}>{label}</span>
             </div>
           ))}
         </div>
