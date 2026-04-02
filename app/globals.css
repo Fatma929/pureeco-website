@@ -1,19 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0A0A0A;
+  --foreground: #E2E8F0;
 }
 
 @theme {
-  /* Brand color tokens */
-  --color-brand-green: #166534;
-  --color-brand-slate: #1E293B;
-  --color-brand-green-light: #22C55E;
-  --color-brand-slate-muted: #475569;
+  /* Neon-Industrial brand tokens */
+  --color-brand-green: #00FF87;
+  --color-brand-slate: #0D1117;
+  --color-brand-green-light: #00FF87;
+  --color-brand-slate-muted: #8B9AB0;
+  --color-brand-teal: #00D4FF;
+  --color-brand-surface: #111827;
+  --color-brand-border: #1E2D3D;
 
-  /* Font family */
-  --font-sans: Inter, system-ui, sans-serif;
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Courier New', monospace;
 }
 
 html {
@@ -26,11 +30,56 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Request Demo button glow + lift effect */
+/* ── Grain texture overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* ── Scanline filter for hero ── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  z-index: 3;
+}
+
+/* ── Blueprint grid ── */
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Request Demo button glow + lift ── */
 .btn-demo {
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 .btn-demo:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.45);
+  box-shadow: 0 0 24px rgba(0, 255, 135, 0.5), 0 6px 20px rgba(0, 255, 135, 0.25);
+}
+
+/* ── Technical label font ── */
+.font-mono-label {
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
 }
