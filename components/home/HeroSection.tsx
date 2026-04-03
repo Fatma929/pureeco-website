@@ -63,8 +63,7 @@ export function HeroSection() {
           className="text-base md:text-lg mb-8 max-w-2xl animate-fade-in-up animate-fade-in-up-delay-2"
           style={{ color: '#FFFFFF', lineHeight: 1.75, fontWeight: 400, opacity: 0.85 }}
         >
-          Your certified platform for reliable emissions intelligence to measure, report,
-          and reduce your carbon footprint.
+          Stop reporting. Start reducing. PureEco turns your emissions data into a clear path to net zero.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 items-center animate-fade-in-up animate-fade-in-up-delay-3">

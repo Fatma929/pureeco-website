@@ -180,7 +180,6 @@ export function ServicesSection() {
                 opacity: visible ? 1 : 0,
                 transform: visible ? 'translateY(0)' : 'translateY(24px)',
                 transition: `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s, background 0.25s ease, box-shadow 0.25s ease`,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
               }}
               onMouseEnter={(e) => {
                 if (activeCard === i) return
